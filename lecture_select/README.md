@@ -11,5 +11,6 @@
 
 ## 模块复用
 
-其中有个单独的模块解析了统一登陆平台的登陆流程，爬取其他所有信息均可复用函数，后面有空我单独抽出来做一个模块。
+其中有个单独的模块解析了统一登陆平台的登陆流程，爬取其他所有信息均可复用，已经单独抽取出来变成了功能模块[USTC_Auth](https://github.com/VincentJYZhang/USTC_Auth)，欢迎使用。
 
+https://github.com/VincentJYZhang/USTC_Auth
