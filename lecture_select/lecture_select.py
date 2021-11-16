@@ -1,6 +1,6 @@
 """
-Zhang Junyang
-2021.04.21
+@author: zhang
+@date: 2021.04.21
 """
 
 import requests
