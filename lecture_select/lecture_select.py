@@ -118,25 +118,78 @@ def selectLecture(session_, lecture_id):
 
 if __name__ == "__main__":
 
-    print('=========学术报告选课脚本=========\n')
+   import tkinter
+import tkinter.messagebox
+from tkinter import *
+import user_config
 
-    session_ = getSessionByAuth(user_config.USER_NAME, user_config.USER_PWD)
 
-    print('统一认证登录成功！')
+stu_id = user_config.USER_NAME
+pwd = user_config.USER_PWD
+lec_id = user_config.LEC_ID
+top = tkinter.Tk()
 
-    lecture_id = input('请输入学术报告的编号：')
 
-    result_flag = selectLecture(session_, lecture_id)
+def finish():
+    #get info
+    stu_id = stu_id_entry.get()
+    pwd = pwd_entry.get()
+    lec_id = lec_id_entry.get()
 
+    #save last info
+    config_file = open("user_config.py","w")
+    config_file.write("USER_NAME = '"+ stu_id +"'\n")
+    config_file.write("USER_PWD = '"+ pwd +"'\n")
+    config_file.write("LEC_ID = '"+ lec_id +"'\n")
+
+
+    #send request
+    session_ = getSessionByAuth(stu_id, pwd)
+    result_flag = selectLecture(session_,lec_id)
     end_word = """选课请求发送成功，请至官网检查是否成功。\n如果发现失败，可能原因如下：
     1. 用户名或密码不正确；
     2. 讲座编号输入有误；
     3. 其他未知玄学原因。"""
-
     error_word = """选课失败，请检查网络。"""
-
     if result_flag:
         print(end_word)
     else:
         print(error_word)
+    tkinter.messagebox.showinfo("",end_word)
 
+
+
+# 进入消息循环
+# #top.mainloop()
+stu_id_label = Label(top, text="学号")
+stu_id_label.pack()
+stu_id_entry = Entry(top, bd =10)
+stu_id_entry.insert(0,stu_id)
+stu_id_entry.pack()
+
+pwd_label = Label(top, text="密码")
+pwd_label.pack( )
+pwd_entry = Entry(top, bd =10,show="*")
+pwd_entry.insert(0,pwd)
+pwd_entry.pack()
+
+lec_id_label = Label(top, text="课程编号")
+lec_id_label.pack( )
+lec_id_entry = Entry(top, bd =10)
+lec_id_entry.insert(0,lec_id)
+lec_id_entry.pack()
+button = tkinter.Button(top, text ="确认", command = finish)
+button.pack(side=LEFT,ipadx = 20)
+
+
+button = tkinter.Button(top, text ="退出", command = top.destroy)
+button.pack(side=RIGHT,ipadx = 20)
+
+
+
+if __name__ == "__main__":
+
+    print('=========学术报告选课脚本=========\n')
+    top.mainloop()
+
+    
