@@ -116,9 +116,9 @@ def selectLecture(session_, lecture_id):
 
 
 
-if __name__ == "__main__":
 
-   import tkinter
+
+import tkinter
 import tkinter.messagebox
 from tkinter import *
 import user_config
@@ -142,7 +142,6 @@ def finish():
     config_file.write("USER_PWD = '"+ pwd +"'\n")
     config_file.write("LEC_ID = '"+ lec_id +"'\n")
 
-
     #send request
     session_ = getSessionByAuth(stu_id, pwd)
     result_flag = selectLecture(session_,lec_id)
@@ -159,30 +158,45 @@ def finish():
 
 
 
-# 进入消息循环
-# #top.mainloop()
-stu_id_label = Label(top, text="学号")
+
+def center_window(root, width, height):
+    screenwidth = root.winfo_screenwidth()
+    screenheight = root.winfo_screenheight()
+    size = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
+    print(size)
+    root.geometry(size)
+    root.update()
+    print(root.winfo_x())
+
+
+center_window(top, 150, 200)
+top.resizable(width=0, height=0)
+top.iconbitmap('assets\logo2.ico')
+top.configure(bg = "SkyBlue")
+top.title(" ")
+
+stu_id_label = Label(top, text="学号",bg = "SkyBlue",font=("楷体", 10))
 stu_id_label.pack()
-stu_id_entry = Entry(top, bd =10)
+stu_id_entry = Entry(top, bd =10,highlightcolor='green',highlightthickness=1)
 stu_id_entry.insert(0,stu_id)
 stu_id_entry.pack()
 
-pwd_label = Label(top, text="密码")
+pwd_label = Label(top, text="密码",bg = "SkyBlue",font=("楷体", 10))
 pwd_label.pack( )
-pwd_entry = Entry(top, bd =10,show="*")
+pwd_entry = Entry(top, bd =10,show="*",highlightcolor='green',highlightthickness=1)
 pwd_entry.insert(0,pwd)
 pwd_entry.pack()
 
-lec_id_label = Label(top, text="课程编号")
+lec_id_label = Label(top, text="课程编号",bg = "SkyBlue",font=("楷体", 10))
 lec_id_label.pack( )
-lec_id_entry = Entry(top, bd =10)
+lec_id_entry = Entry(top, bd =10, highlightcolor='green',highlightthickness=1)
 lec_id_entry.insert(0,lec_id)
 lec_id_entry.pack()
-button = tkinter.Button(top, text ="确认", command = finish)
+button = tkinter.Button(top, text ="确认", command = finish,bg = "SkyBlue",font=("楷体", 10))
 button.pack(side=LEFT,ipadx = 20)
 
 
-button = tkinter.Button(top, text ="退出", command = top.destroy)
+button = tkinter.Button(top, text ="退出", command = top.destroy,bg = "SkyBlue",font=("楷体", 10))
 button.pack(side=RIGHT,ipadx = 20)
 
 
